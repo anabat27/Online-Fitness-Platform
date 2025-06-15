@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Meals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Meal History</h2>
+    <p><strong>Total Calories Logged:</strong> {{ total }}</p>
+
+    {% if meals %}
+        <ul>
+        {% for m in meals %}
+            <li style="margin-bottom: 15px;">
+                <strong>{{ m.food }}</strong> – {{ m.calories }} kcal ({{ m.timestamp.date() }})<br>
+                Notes: {{ m.notes or "None" }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No meals logged yet.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('log_meal') }}" class="btn btn-primary" style="margin-bottom: 10px; display: inline-block; padding: 10px 20px;">Log a New Meal</a><br>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

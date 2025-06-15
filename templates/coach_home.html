@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coach Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f8fb;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dashboard-wrapper {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-grid a {
+            text-decoration: none;
+            padding: 14px 26px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            min-width: 220px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-grid a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <h1>Welcome, {{ current_user.name }}</h1>
+        <p class="subtitle">Your coaching tools and community controls</p>
+
+        <div class="button-grid">
+            <a href="{{ url_for('coach_dashboard') }}">Manage Clients & Assign Plans</a>
+            <a href="{{ url_for('my_plans') }}">My Workout Plans</a>
+            <a href="{{ url_for('coach_requests') }}">Incoming Coach Requests</a>
+            <a href="{{ url_for('forum') }}">Community Forum</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

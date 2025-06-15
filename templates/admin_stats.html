@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Platform Stats</title></head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<body>
+    <h2>Platform Summary</h2>
+
+    <ul>
+        <li><strong>Total Users:</strong> {{ user_count }}</li>
+        <li><strong>Total Coaches:</strong> {{ coach_count }} ({{ verified_coaches }} verified)</li>
+        <li><strongSuspended Accounts:</strong> {{ suspended_count }}</li>
+        <li><strong>Total Forum Posts:</strong> {{ post_count }}</li>
+        <li><strong Total Post Reports:</strong> {{ report_count }}</li>
+    </ul>
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="margin-top: 10px;">Back to Dashboard</a>
+</body>
+</html>

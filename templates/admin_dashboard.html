@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .badge {
+            background-color: #2ecc71;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .verified-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, Admin {{ current_user.name }}</h2>
+
+    <h3>All Registered Users</h3>
+
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Suspended?</th>
+            <th>Verified?</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ "Yes" if user.suspended else "No" }}</td>
+            <td>
+                {% if user.role == 'coach' %}
+                    <div class="verified-cell">
+                        {% if user.is_verified %}
+                            <span class="badge">Verified</span>
+                            <a href="{{ url_for('unverify_coach', user_id=user.id) }}" class="btn btn-primary btn-sm">Unverify</a>
+                        {% else %}
+                            <a href="{{ url_for('verify_coach', user_id=user.id) }}" class="btn btn-primary btn-sm">Verify</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>
+                {% if user.role != 'admin' %}
+                    <div class="btn-group">
+                        {% if user.suspended %}
+                            <a href="{{ url_for('reactivate_user', user_id=user.id) }}" class="btn btn-primary btn-sm">Reactivate</a>
+                        {% else %}
+                            <a href="{{ url_for('suspend_user', user_id=user.id) }}" class="btn btn-primary btn-sm">Suspend</a>
+                        {% endif %}
+                        <a href="{{ url_for('delete_user', user_id=user.id) }}" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

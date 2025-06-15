@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Workout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h2>Edit Workout</h2>
+    <form method="POST">
+        <label>Exercise:</label><br>
+        <input type="text" name="exercise" value="{{ workout.exercise }}" required><br><br>
+
+        <label>Duration:</label><br>
+        <input type="text" name="duration" value="{{ workout.duration }}" required><br><br>
+
+        <label>Notes:</label><br>
+        <textarea name="notes" rows="4" cols="40">{{ workout.notes }}</textarea><br><br>
+
+        <input type="submit" value="Update Workout">
+    </form>
+</body>
+</html>

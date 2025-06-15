@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Workout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="layout-wrapper">
+        <h2>Log a Workout</h2>
+
+        <form method="POST">
+            <label>Exercise:</label>
+            <input type="text" name="exercise" required>
+
+            <label>Duration:</label>
+            <input type="text" name="duration" placeholder="e.g. 30 minutes" required>
+
+            <label>Notes:</label>
+            <textarea name="notes" rows="4"></textarea>
+
+            <input type="submit" value="Save Workout" class="btn btn-primary">
+        </form>
+
+        <a href="{{ url_for('view_workouts') }}" class="btn btn-primary" style="margin-top: 10px;">View My Workouts</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="margin-top: 10px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

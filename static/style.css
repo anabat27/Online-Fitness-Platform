@@ -1,0 +1,161 @@
+/* Page Layout */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: #f2f6fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Target central card containers */
+.layout-wrapper {
+    max-width: 600px;
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #eaf2f8;
+    color: #2c3e50;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* Buttons + Link Buttons */
+input[type="submit"],
+button,
+.btn,
+a.btn {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+input[type="submit"]:hover,
+button:hover,
+.btn:hover,
+a.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Flash Messages */
+.flash {
+    background-color: #fff8dc;
+    border: 1px solid #f5e8b4;
+    padding: 10px;
+    border-radius: 5px;
+    color: #8a6d3b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Basic Links */
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Card Links */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul.card-links li {
+    margin: 10px 0;
+}
+
+ul.card-links a {
+    display: block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+ul.card-links a:hover {
+    background-color: #2980b9;
+}
+
+/* Optional: Centered Auth Pages */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-wrapper form {
+    width: 100%;
+    max-width: 400px;
+}

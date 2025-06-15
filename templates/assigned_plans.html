@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Assigned Plans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Workout Plans Assigned to You</h2>
+
+    {% if plans %}
+        <ul>
+            {% for plan in plans %}
+                <li style="margin-bottom: 20px;">
+                    <strong>{{ plan.title }}</strong><br>
+                    From: Coach {{ plan.coach.name }}<br>
+                    Description: {{ plan.description or 'No description' }}<br>
+                    Status: {{ "✅ Completed" if plan.completed else "❌ In Progress" }}<br>
+                    {% if not plan.completed %}
+                        <a href="{{ url_for('complete_plan', plan_id=plan.id) }}" class="btn btn-primary" style="margin-top: 5px; display: inline-block;">Mark as Completed</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No plans have been assigned to you yet.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

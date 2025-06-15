@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find a Coach</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Find a Verified Coach</h2>
+
+    <form method="GET" action="{{ url_for('find_coach') }}" style="margin-bottom: 20px;">
+        <input type="text" name="search" placeholder="Search by name" value="{{ search or '' }}">
+        <input type="text" name="specialization" placeholder="Specialization" value="{{ specialization or '' }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <hr>
+
+    <ul style="list-style: none; padding: 0;">
+        {% for coach in coaches %}
+        <li style="margin-bottom: 20px;">
+            <strong>{{ coach.name }}</strong> ({{ coach.email }})<br>
+            {% if coach.specialization %}
+                Specialization: {{ coach.specialization }}<br>
+            {% endif %}
+            {% if coach.is_verified %}✔ Verified{% endif %}
+
+            {% if current_user.role == 'user' %}
+                <form action="{{ url_for('request_coach', coach_id=coach.id) }}" method="post" style="margin-top: 5px;">
+                    <button type="submit" class="btn btn-primary">Request Coach</button>
+                </form>
+            {% endif %}
+        </li>
+        {% else %}
+        <li>No matching coaches found.</li>
+        {% endfor %}
+    </ul>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

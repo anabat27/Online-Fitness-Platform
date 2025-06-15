@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Meal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="layout-wrapper">
+        <h2>Log a Meal</h2>
+        <form method="POST">
+            <label>Food Item:</label>
+            <input type="text" name="food" required>
+
+            <label>Calories:</label>
+            <input type="number" name="calories" required>
+
+            <label>Notes:</label>
+            <textarea name="notes" rows="3"></textarea>
+
+            <input type="submit" value="Save Meal" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">
+        </form>
+
+        <a href="{{ url_for('my_meals') }}" class="btn btn-primary" style="margin-bottom: 10px; display: inline-block;">View My Meals</a><br>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="display: inline-block;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

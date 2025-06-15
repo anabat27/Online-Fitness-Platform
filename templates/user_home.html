@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f8fb;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .user-dashboard {
+            max-width: 950px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .coach-info {
+            margin: 20px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .button-grid a {
+            text-decoration: none;
+            padding: 14px 26px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            min-width: 220px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-grid a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-dashboard">
+        <h1>Welcome, {{ current_user.name }}</h1>
+
+        <div class="coach-info">
+            {% if accepted_request %}
+                <p><strong>Your Coach:</strong> {{ accepted_request.requested_coach.name }} ({{ accepted_request.requested_coach.email }})</p>
+            {% else %}
+                <p><em>You do not have an accepted coach yet.</em></p>
+            {% endif %}
+        </div>
+
+        <div class="button-grid">
+            <a href="{{ url_for('log_workout') }}">Log Workout</a>
+            <a href="{{ url_for('view_workouts') }}">View My Workouts</a>
+            <a href="{{ url_for('assigned_plans') }}">My Plans</a>
+            <a href="{{ url_for('weekly_report') }}">Weekly Report</a>
+            <a href="{{ url_for('log_meal') }}">Log Meal</a>
+            <a href="{{ url_for('my_meals') }}">My Meals</a>
+            <a href="{{ url_for('my_feedback') }}">Coach Feedback</a>
+            <a href="{{ url_for('find_coach') }}">Find a Coach</a>
+            <a href="{{ url_for('my_requests') }}">My Coach Requests</a>
+            <a href="{{ url_for('forum') }}">Community Forum</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

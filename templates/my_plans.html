@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Assigned Plans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Workout Plans You've Assigned</h2>
+
+    {% for p in plans %}
+        <div style="margin-bottom: 20px;">
+            <p>
+                <strong>{{ p.title }}</strong> – to {{ p.user.name }}<br>
+                {{ p.description or 'No description' }}
+            </p>
+        </div>
+    {% else %}
+        <p>No plans assigned yet.</p>
+    {% endfor %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

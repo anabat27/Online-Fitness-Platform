@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Feedback from Your Coach</h2>
+
+    {% if feedbacks %}
+        <ul>
+        {% for f in feedbacks %}
+            <li style="margin-bottom: 15px;">
+                <strong>{{ f.timestamp.strftime('%Y-%m-%d %H:%M') }}</strong><br>
+                {{ f.content }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not received any feedback yet.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

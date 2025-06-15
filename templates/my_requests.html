@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Coach Requests</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>My Coach Requests</h2>
+
+    {% if requests %}
+        <ul style="list-style: none; padding: 0;">
+        {% for r in requests %}
+            <li style="margin-bottom: 20px;">
+                Coach: <strong>{{ r.requested_coach.name }}</strong> ({{ r.requested_coach.email }})<br>
+                Status: <strong>{{ r.status.capitalize() }}</strong><br>
+                Sent: {{ r.timestamp.strftime('%Y-%m-%d %H:%M') }}
+            </li>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't requested any coaches yet.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

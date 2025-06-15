@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Forum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Community Forum</h1>
+
+    <form method="POST" action="{{ url_for('forum') }}" style="margin-bottom: 20px;">
+        <input type="text" name="title" placeholder="Post Title" required><br><br>
+        <textarea name="content" placeholder="What's on your mind?" required></textarea><br><br>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+
+    <hr>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul style="color: red;">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
+    {% for post in posts %}
+        <div style="border: 1px solid gray; padding: 10px; margin-bottom: 20px;">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <small>Posted by {{ post.author.name }} on {{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</small><br><br>
+
+            {% if current_user.role == 'admin' %}
+                <form method="GET" action="{{ url_for('delete_post', post_id=post.id) }}" style="margin-bottom: 10px;">
+                    <button type="submit" class="btn btn-primary">🗑 Delete Post</button>
+                </form>
+            {% else %}
+                <form method="POST" action="{{ url_for('report_post', post_id=post.id) }}" style="margin-bottom: 10px;">
+                    <input type="text" name="reason" placeholder="Reason (optional)"><br><br>
+                    <button type="submit" class="btn btn-primary">🚩 Report</button>
+                </form>
+            {% endif %}
+
+            <h4>Replies:</h4>
+            {% for reply in post.replies %}
+                <div style="margin-left: 20px; margin-bottom: 10px;">
+                    <p>{{ reply.content }}</p>
+                    <small>— {{ reply.author.name }} at {{ reply.timestamp.strftime('%Y-%m-%d %H:%M') }}</small><br>
+                    {% if current_user.role == 'admin' %}
+                        <form method="GET" action="{{ url_for('delete_reply', reply_id=reply.id) }}" style="margin-top: 5px;">
+                            <button type="submit" class="btn btn-primary">🗑 Delete Reply</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p style="margin-left: 20px;"><em>No replies yet.</em></p>
+            {% endfor %}
+
+            <form method="POST" action="{{ url_for('reply', post_id=post.id) }}" style="margin-top: 10px;">
+                <textarea name="reply_content" placeholder="Write a reply..." required></textarea><br><br>
+                <button type="submit" class="btn btn-primary">Reply</button>
+            </form>
+        </div>
+    {% endfor %}
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

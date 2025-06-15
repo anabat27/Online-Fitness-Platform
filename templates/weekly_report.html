@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Weekly Progress Report</h2>
+    <p><strong>From:</strong> {{ week_start }} <strong>To:</strong> {{ week_end }}</p>
+
+    <h3>Workout Sessions This Week</h3>
+    {% if workouts %}
+        <ul>
+            {% for w in workouts %}
+                <li>{{ w.exercise }} – {{ w.duration }} ({{ w.timestamp.date() }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No workouts logged this week.</p>
+    {% endif %}
+
+    <h3>Completed Workout Plans</h3>
+    <p>{{ completed_count }} plans marked as completed.</p>
+
+    <h3>Active Plans</h3>
+    {% if active_plans %}
+        <ul>
+            {% for plan in active_plans %}
+                <li><strong>{{ plan.title }}</strong> – assigned by Coach {{ plan.coach.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No active plans.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

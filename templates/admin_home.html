@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f8fb;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .admin-dashboard {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-grid a {
+            text-decoration: none;
+            padding: 14px 26px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            min-width: 220px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-grid a:hover {
+            background-color: #217dbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-dashboard">
+        <h2>Welcome, {{ current_user.name }}</h2>
+        <p class="subtitle">Platform control panel — manage users, content, and data</p>
+
+        <div class="button-grid">
+            <a href="{{ url_for('admin_dashboard') }}">Manage Users</a>
+            <a href="{{ url_for('forum') }}">Moderate Forum</a>
+            <a href="{{ url_for('reported_posts') }}">Review Reported Posts</a>
+            <a href="{{ url_for('admin_stats') }}">View Platform Stats</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

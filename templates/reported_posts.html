@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reported Posts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h2>Reported Posts</h2>
+
+{% if reports %}
+    {% for report in reports %}
+        <div style="border: 1px solid gray; padding: 10px; margin-bottom: 20px;">
+            <strong>Post:</strong> {{ report.post.title }}<br>
+            <strong>Reported by:</strong> {{ report.reporter.name }}<br>
+            <strong>Reason:</strong> {{ report.reason or "No reason provided" }}<br>
+            <strong>Posted by:</strong> {{ report.post.author.name }}<br>
+            <p>{{ report.post.content }}</p>
+            <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                <a href="{{ url_for('delete_post', post_id=report.post.id) }}" class="btn btn-primary">🗑 Delete Post</a>
+                <a href="{{ url_for('delete_report', report_id=report.id) }}" class="btn btn-primary">✔ Mark Reviewed</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No reported posts.</p>
+{% endif %}
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="padding: 10px 20px;">Back to Dashboard</a>
+</div>
+</body>
+</html>

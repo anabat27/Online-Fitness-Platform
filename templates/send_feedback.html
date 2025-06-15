@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>Send Feedback to {{ user.name }}</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <p>{{ form.content.label }}<br>{{ form.content(rows=6, class="form-control") }}</p>
+  <p>{{ form.submit(class="btn btn-primary") }}</p>
+</form>
